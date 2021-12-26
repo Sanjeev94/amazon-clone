@@ -2,12 +2,18 @@ import React,{useState} from 'react';
 import "./Register.css";
 import {Link} from "react-router-dom";
 import AmazonLogo from "../../Amazon_Logo.png";
+import {useSelector, useDispatch} from "react-redux";
+import {registerInitiate} from "../../redux/actions";
 
 const Register = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const dispatch = useDispatch();
     const register = e => {
         e.preventDefault();
+        dispatch(registerInitiate(email, password));
+        setEmail("");
+        setPassword("");
     };
 
     return (
@@ -27,7 +33,7 @@ const Register = () => {
                     </button>
                     <div className="detail">
                         <p>Already Have an Account ?</p>
-                        <Link to="/login" className="signIn-link">
+                        <Link to="/login" className="signin-link">
                             <p>Sign In</p>
                         </Link>
                     </div>
