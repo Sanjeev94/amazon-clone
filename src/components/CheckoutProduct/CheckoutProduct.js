@@ -2,10 +2,13 @@ import React from "react";
 import "./CheckoutProduct.css";
 import {useDispatch} from "react-redux";
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
+import {removeFromBasket} from "../../redux/actions";
 
 const CheckoutProduct = ({id, title, image, rating, price}) => {
     const dispatch = useDispatch();
-    const removeItemFromBasket = () => {};
+    const removeItemFromBasket = () => {
+        dispatch(removeFromBasket(id));
+    };
     return (
         <div className="checkout-product">
             <img src={image} alt="" className="checkout-product-image" />
