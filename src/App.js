@@ -9,6 +9,7 @@ import {useDispatch} from "react-redux";
 import {auth} from "./utils/firebase";
 import {setuser} from "./redux/actions";
 import SingleProduct from "./pages/SingleProduct/SingleProduct";
+import Checkout from "./pages/Checkout/Checkout";
 
 
 function App() {
@@ -27,6 +28,10 @@ function App() {
     <BrowserRouter>
     <div className="App">
       <Switch>
+      <Route path="/checkout" >
+          <Header />
+          <Checkout />
+        </Route>
       <Route path="/product/:id" >
           <Header />
           <SingleProduct />
