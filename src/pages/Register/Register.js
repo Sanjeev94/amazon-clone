@@ -1,6 +1,6 @@
-import React,{useState} from 'react';
+import React,{useState, useEffect} from 'react';
 import "./Register.css";
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import AmazonLogo from "../../Amazon_Logo.png";
 import {useSelector, useDispatch} from "react-redux";
 import {registerInitiate} from "../../redux/actions";
@@ -8,6 +8,17 @@ import {registerInitiate} from "../../redux/actions";
 const Register = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const {user} = useSelector(state => state.data);
+    const history = useHistory();
+    console.log("user=>", user);
+
+    useEffect(() => {
+        if(user) {
+            history.push("/");
+        }
+      
+    }, [user, dispatch]);
+
     const dispatch = useDispatch();
     const register = e => {
         e.preventDefault();

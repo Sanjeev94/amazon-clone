@@ -4,8 +4,17 @@ import SearchIcon from "@material-ui/icons/Search";
 import LocationOnOutlinedIcon from "@material-ui/icons/LocationOnOutlined";
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 import {Link} from "react-router-dom";
+import {useSelector, useDispatch} from "react-redux";
+import {logoutInitiate} from "../../redux/actions";
 
 const Header = () => {
+    const {user} = useSelector((state) => state.data);
+    const dispatch = useDispatch();
+    const handleAuth = () => {
+        if(user) {
+            dispatch(logoutInitiate());
+        }
+    };
     return (
         <nav className="header">
             <Link to="/">
@@ -26,16 +35,22 @@ const Header = () => {
                 <SearchIcon className="searchIcon" />
             </div>
             <div className="header-nav">
-                <Link to="/login" className="header-link">
-                    <div className="header-option">
-                    <span className="header-option1">Hello Guest</span>
-                    <span className="header-option2">Sign In</span>
+                <Link to={`${user ? "/" : "/login"}`} className="header-link">
+                    <div onClick={handleAuth} className="header-option">
+                    <span className="header-option1">Hello, {user ? user.email : "Guest"}{" "}</span>
+                    <span className="header-option2">{user ? "Sign Out" : "Sign In"}</span>
                     </div>
                 </Link>
                 <Link to="/orders" className="header-link">
                     <div className="header-option">
                     <span className="header-option1">Returns</span>
                     <span className="header-option2">& Orders</span>
+                    </div>
+                </Link>
+                <Link to="/login" className="header-link">
+                    <div className="header-option">
+                    <span className="header-option1">Your</span>
+                    <span className="header-option2">Prime</span>
                     </div>
                 </Link>
                 <Link to="/checkout" className="header-link">
