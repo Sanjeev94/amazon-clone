@@ -8,7 +8,7 @@ import {useSelector, useDispatch} from "react-redux";
 import {logoutInitiate} from "../../redux/actions";
 
 const Header = () => {
-    const {user} = useSelector((state) => state.data);
+    const {user, basket} = useSelector((state) => state.data);
     const dispatch = useDispatch();
     const handleAuth = () => {
         if(user) {
@@ -56,7 +56,7 @@ const Header = () => {
                 <Link to="/checkout" className="header-link">
                     <div className="header-basket">
                         <ShoppingCartOutlinedIcon />
-                        <span className="header-option2 basket-count">0</span>
+                        <span className="header-option2 basket-count">{basket && basket.length}</span>
                     </div>
                 </Link>
             </div>
