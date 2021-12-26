@@ -10,6 +10,11 @@ import {auth} from "./utils/firebase";
 import {setuser} from "./redux/actions";
 import SingleProduct from "./pages/SingleProduct/SingleProduct";
 import Checkout from "./pages/Checkout/Checkout";
+import Payment from "./pages/Payment/Payment";
+import {loadStripe} from "@stripe/stripe-js";
+import {Elements} from "@stripe/react-stripe-js";
+
+const promise = loadStripe("pk_test_51KB4ewSJoO7pDFmMtaarMJQBNH6FMvJjWpd0rsqiFk6nYaRlhOUYMtD9K0wPxYBsNQ8AfMNYqrMy1J1n7ZI08UuS00NuVXEJUx");
 
 
 function App() {
@@ -28,6 +33,12 @@ function App() {
     <BrowserRouter>
     <div className="App">
       <Switch>
+      <Route path="/payment" >
+          <Header />
+          <Elements stripe={promise}>
+          <Payment />
+          </Elements>
+        </Route>
       <Route path="/checkout" >
           <Header />
           <Checkout />
